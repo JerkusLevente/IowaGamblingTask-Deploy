@@ -1,0 +1,7 @@
+{
+  "name": "IOWA-Gambling-Task",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

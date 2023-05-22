@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details of the test named:  {{testName}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col  class="ion-text-center">
+      <ion-card class="full-width-card" style="background-color: #3880ff;">
+        <h1 style="color: white;">Decks used in the test:</h1>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let name of deckNames; let i = index">
+      <ion-card class="card-centered" (click)="listCards(DeckIDs[i])">
+        {{ name }}
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card class="card-centered" style="background-color: #3880ff;">
+        <h1 style="color: white;">
+          Favored decks when picking a card
+        </h1>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="card-centered" style="background-color: #3880ff;">
+        <h1 style="color: white;">
+          Favored Decks when hovering (milliseconds)
+        </h1>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <canvas id="favoredChoosingChart" style="display: block; margin: auto;"></canvas>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card>
+        <canvas id="favoredHoversChart" style="display: block; margin: auto;"></canvas>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card class="card-centered" style="background-color: #3880ff;">
+        <h1 style="color: white;">
+          Details of each step
+        </h1>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+<ion-grid *ngFor="let step of steps">
+  <ion-row>
+    <ion-col>
+      <ion-card class="card-centered" style="background-color: #3880ff; color: white;"> 
+        Step Number: {{ step.stepNumber }}
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card class="card-centered">
+        Chosen Deck Number: {{ step.choosenDeckNumber }}
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="card-centered">
+        Elapsed Time (milliseconds): {{ step.stepTime }}
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="card-centered">
+        Total Gain: {{ step.totalGain }}
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card class="card-centered">
+        Button Hovers during step: {{ step.stepNumber }}
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-grid *ngFor="let buttonHover of step.buttonHovers">
+    <ion-row>
+      <ion-col>
+        <ion-card class="card-centered">
+          Deck Number: {{ buttonHover.deckNumber }}
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="card-centered">
+          Hover Time (milliseconds): {{ buttonHover.hoverTime }}
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-grid>
+
+</ion-grid>
+</ion-content>

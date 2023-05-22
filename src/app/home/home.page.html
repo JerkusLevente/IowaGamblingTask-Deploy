@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Logged in as {{ currentUserEmail }}!
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="listDecks()">
+        List Decks
+      </ion-button>
+      <ion-button (click)="addDeck()">
+        Add Deck
+      </ion-button>
+      <ion-button (click)="listUsers()">
+        List Users
+      </ion-button>
+      <ion-button (click)="listTestsAllocatedByMe()">
+        List Tests Issued By Me
+      </ion-button>
+      <ion-button (click)="listTestsAllocatedToMe()">
+        List Tests Allocated To Me
+      </ion-button>
+      <ion-button (click)="logout()">
+        Logout
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Welcome</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+  
+  <ion-list *ngIf="showDecks">
+    <h1>Available Decks</h1>
+    <ion-item *ngFor="let deck of decks">
+      <h2>{{ deck.payload.doc.data().deckName }}</h2>
+      <ion-button slot="end"  ion-button (click)="addCardToDeck(deck.payload.doc.id)">Add New Card To Deck</ion-button>
+      <ion-button slot="end"  ion-button (click)="listAllCardsOfTheDeck(deck.payload.doc.id)">List all cards of the Deck</ion-button>
+    </ion-item>
+  </ion-list>
+  
+  <ion-list *ngIf="tests && tests.length > 0 && !showDecks">
+    <h1>Available Tests</h1>
+    <ion-item *ngFor="let test of tests">
+      <h2>{{ test.payload.doc.data().testName }}</h2>
+      <ion-button slot="end"  *ngIf="hasAllocatedTests" (click)="startTest(test.payload.doc.id)">Take Test</ion-button>
+      <ion-button slot="end"  *ngIf="hasDetails" (click)="viewDetails(test.payload.doc.id)">View Details</ion-button>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

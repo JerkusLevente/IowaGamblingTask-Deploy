@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ testName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="pickFromDeckOne()" shape="rectangle" expand="block" class="taller-button" (mouseover)="onButtonHover($event, 'Deck 1')" (mouseout)="onButtonLeave('Deck 1')">1</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="pickFromDeckTwo()" shape="rectangle" expand="block" class="taller-button" (mouseover)="onButtonHover($event, 'Deck 2')" (mouseout)="onButtonLeave('Deck 2')">2</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="pickFromDeckThree()" shape="rectangle" expand="block" class="taller-button" (mouseover)="onButtonHover($event, 'Deck 3')" (mouseout)="onButtonLeave('Deck 3')">3</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="pickFromDeckFour()" shape="rectangle" expand="block" class="taller-button" (mouseover)="onButtonHover($event, 'Deck 4')" (mouseout)="onButtonLeave('Deck 4')">4</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>Choosen Deck: {{ choosenDeck }}</p>
+        <p>Gain: {{ previouslyPickedCard?.gain }}</p>
+        <p>Loss: {{ previouslyPickedCard?.loss }}</p>
+        <p>Net Gain: {{ previouslyPickedCard?.gain-previouslyPickedCard?.loss}}</p>
+      </ion-col>
+      <ion-col>
+        <p>Total Gains: {{ totalGain }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-label>Cash Pile</ion-label>
+      <ion-progress-bar [value]="cashPilePerMax" color="success" style="height: 20px; border-radius: 10px;"></ion-progress-bar>
+      <ion-label>Borrow</ion-label>
+      <ion-progress-bar [value]="borrowPerMax" color="danger"  style="height: 20px; border-radius: 10px;"></ion-progress-bar>
+    </ion-row>
+  </ion-grid>
+</ion-content>
